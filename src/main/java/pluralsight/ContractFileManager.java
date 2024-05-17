@@ -7,31 +7,22 @@ import java.util.ArrayList;
 
 public class ContractFileManager {
 
-    public Contract getContract() {
+    public ArrayList<Contract> getContract() {
 
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        ArrayList<Contract> contracts = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader("contracts.csv"))) {
             String line;
             int lineNumber = 0;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split("\\|");
-                if (lineNumber == 0) { // dealership info
-                    String name = fields[0];
-                    String address = fields[1];
-                    String phone = fields[2];
-                    dealership = new Dealership(name, address, phone);
-                } else { // vehicle info
-                    int vin = Integer.parseInt(fields[0]);
-                    int year = Integer.parseInt(fields[1]);
-                    String make = fields[2];
-                    String model = fields[3];
-                    String vehicleType = fields[4];
-                    String color = fields[5];
-                    int odometer = Integer.parseInt(fields[6]);
-                    double price = Double.parseDouble(fields[7]);
-                    Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
-                    vehicles.add(vehicle);
+                if (fields[0].trim().equalsIgnoreCase("SALE")) {
+                    Vehicle saleInContract = new Vehicle(Integer.parseInt(fields[4]), Integer.parseInt(fields[5]), fields[6], fields[7], fields[8], fields[9], Integer.parseInt(fields[10]), Double.parseDouble(fields[11]));
+                    contracts.add(new SalesContract(fields[1], fields[2], fields[3], saleInContract, Double.parseDouble(fields[11]), Double.parseDouble(fields[17]), Double.parseDouble(fields[12]), Double.parseDouble(fields[13]), Double.parseDouble(fields[14]), fields[10]));
+                }
+                if (fields[0].trim().equalsIgnoreCase("LEASE")) {
+                    Vehicle leaseInContract = new Vehicle(Integer.parseInt(fields[4]), Integer.parseInt(fields[5]), fields[6], fields[7], fields[8], fields[9], Integer.parseInt(fields[10]), Double.parseDouble(fields[11]));
+                    contracts.add(new LeaseContract(fields[1], fields[2], fields[3], leaseInContract, Double.parseDouble(fields[11]), Double.parseDouble(fields[17]), Double.parseDouble(fields[12]), Double.parseDouble(fields[13])));
                 }
                 lineNumber++;
             }
@@ -39,14 +30,9 @@ public class ContractFileManager {
             e.printStackTrace();
         }
 
-        if (dealership != null) {
-            for (Vehicle vehicle : vehicles) {
-                dealership.addVehicle(vehicle);
-            }
-        }
 
-        return dealership;
+        return contracts;
     }
-    }
-
 }
+
+
