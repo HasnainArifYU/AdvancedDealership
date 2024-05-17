@@ -48,29 +48,28 @@ public class SalesContract extends Contract {
 
     @Override
     public double getTotalPrice() {
-        double price = (((this.vehicleSold.getPrice())/100)*105)+100;
-        if (this.vehicleSold.getPrice()>=10000.0){
-            price += 495.0;
-        }
-        else {
-            price += 295;
-        }
-        return price;
+        return getVehicleSold().getPrice() + salesTax + recordingFee + processingFee;
     }
 
     @Override
     public double getMonthlyPayment() {
-        if (isFinance()) {
-            if ((getTotalPrice()>=10000.0)){
-                this.monthlyPayment = ((getTotalPrice()/100)*104.25)/48;
+        int numberOfPayments = 0;
+        double interestRate = 0;
+        if (finance) {
+            if (getVehicleSold().getPrice() >= 10000) {
+                numberOfPayments = 48;
+                interestRate = 4.25 / 1200;
+            } else {
+                numberOfPayments = 24;
+                interestRate = 5.25 / 1200;
             }
-            else{
-                this.monthlyPayment = ((getTotalPrice()/100)*105.25)/24;
-            }
+
+            double monthlyPayment = getTotalPrice() * (interestRate * Math.pow(1 + interestRate, numberOfPayments)) / (Math.pow(1 + interestRate, numberOfPayments) - 1);
+            monthlyPayment = Math.round(monthlyPayment * 100);
+            monthlyPayment /= 100;
+            return monthlyPayment;
+        } else {
+            return 0.0;
         }
-        else {
-            this.monthlyPayment = 0;
-        }
-        return monthlyPayment;
     }
 }
