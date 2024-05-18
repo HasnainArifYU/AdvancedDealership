@@ -1,8 +1,6 @@
 package pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ContractFileManager {
@@ -33,6 +31,25 @@ public class ContractFileManager {
 
         return contracts;
     }
+
+    public void saveContract(Contract contract) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
+            if (contract instanceof SalesContract) {
+                Vehicle vehicle = contract.vehicleSold;
+                bw.write("SALE|" + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "|" + vehicle.getVin() + "|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + ((SalesContract) contract).getRecordingFee() + "|" + ((SalesContract) contract).getProcessingFee() + "|" + contract.totalPrice + "|" + ((SalesContract) contract).isFinance() + "|" + contract.monthlyPayment);
+                bw.newLine();
+                
+            }
+
+            System.out.println("Contract saved successfully to contracts.csv.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
 
 
