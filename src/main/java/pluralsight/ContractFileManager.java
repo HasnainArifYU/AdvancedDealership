@@ -36,9 +36,12 @@ public class ContractFileManager {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
             if (contract instanceof SalesContract) {
                 Vehicle vehicle = contract.vehicleSold;
-                bw.write("SALE|" + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "|" + vehicle.getVin() + "|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + ((SalesContract) contract).getRecordingFee() + "|" + ((SalesContract) contract).getProcessingFee() + "|" + contract.totalPrice + "|" + ((SalesContract) contract).isFinance() + "|" + contract.monthlyPayment);
+                bw.write("SALE|" + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "|" + vehicle.getVin() +"|"+ vehicle.getYear()+"|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + ((SalesContract) contract).getRecordingFee() + "|" + ((SalesContract) contract).getProcessingFee() + "|" + contract.getTotalPrice() + "|" + ((SalesContract) contract).isFinance() + "|" + contract.getMonthlyPayment());
                 bw.newLine();
-                
+            }
+            if (contract instanceof LeaseContract){
+                Vehicle vehicle = contract.vehicleSold;
+                bw.write("LEASE|"+contract.getDate()+"|"+contract.getName()+"|"+contract.getEmail()+"|"+vehicle.getVin()+"|"+vehicle.getYear()+"|"+vehicle.getMake()+"|"+vehicle.getModel()+ "|"+ vehicle.getVehicleType()+"|"+vehicle.getColor()+"|"+vehicle.getOdometer()+"|"+vehicle.getPrice()+"|"+((LeaseContract) contract).getEndingValue()+"|"+((LeaseContract) contract).getLeaseFee()+"|"+contract.getTotalPrice()+"|"+contract.getMonthlyPayment());
             }
 
             System.out.println("Contract saved successfully to contracts.csv.");

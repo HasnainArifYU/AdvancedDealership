@@ -193,5 +193,9 @@ public class UserInterface {
             System.out.println(vehicle.toString());
         }
     }
+    private void processASaleRequest() {
+
+
+    }
 
 }
