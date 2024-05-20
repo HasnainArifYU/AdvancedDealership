@@ -26,6 +26,8 @@ public class UserInterface {
             System.out.println("7. Get all vehicles");
             System.out.println("8. Add vehicle");
             System.out.println("9. Remove vehicle");
+            System.out.println("10. Buy A Vehicle ");
+            System.out.println("11. Lease A Vehicle ");
             System.out.println("99. Quit");
 
             System.out.print("Enter your choice: ");
@@ -58,6 +60,9 @@ public class UserInterface {
                     break;
                 case "9":
                     processRemoveVehicleRequest();
+                    break;
+                case "10":
+                    processASaleRequest();
                     break;
                 case "99":
                     quit = true;
@@ -193,8 +198,54 @@ public class UserInterface {
             System.out.println(vehicle.toString());
         }
     }
-    private void processASaleRequest() {
 
+    private void processASaleRequest() {
+        double recordingFee = 100.0;
+        double salesTaxPercentage = 0.05;
+        Scanner s = new Scanner(System.in);
+        System.out.println("Please Enter the date of Sale in format YYYYMMDD ");
+        String Date = s.nextLine();
+        System.out.println("Please Enter the Name of the Buyer ");
+        String Name = s.nextLine();
+        System.out.println("Please Enter Buyer's Email ");
+        String Email = s.nextLine();
+        System.out.println("Now please enter the VIN number of your Vehicle ");
+        int VIN = s.nextInt();
+        s.nextLine();
+        double processingFee;
+        double price;
+        double salesTax;
+        String finance = null;
+
+        Vehicle found = dealership.getVehicleByVIN(VIN);
+        if (found==null) {
+            System.out.println("Vehicle not found ");
+        }
+        else {
+            price = found.getPrice();
+            salesTax = price*salesTaxPercentage;
+            if (price>=10000.0) {
+                processingFee = 495;
+            }
+            else {
+                processingFee = 295;
+            }
+            System.out.println("Would you like to Finance the Car? Yes/No");
+            String reply = s.nextLine();
+            if (reply.equalsIgnoreCase("yes")) {
+                 finance = "YES";
+            }
+            else {
+                 finance = "NO";
+            }
+        }
+        SalesContract contract = new SalesContract(Date, Name, Email, found, finance);
+        ContractFileManager manager1 = new ContractFileManager();
+
+        manager1.saveContract(contract);
+        dealership.removeVehicle(found);
+        DealershipFileManager manager2 = new DealershipFileManager();
+        manager2.saveDealership(dealership);
 
     }
 

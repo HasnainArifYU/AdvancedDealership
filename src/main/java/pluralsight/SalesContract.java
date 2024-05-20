@@ -6,11 +6,16 @@ public class SalesContract extends Contract {
     private double processingFee;
     private String finance;
 
-    public SalesContract(String date, String name, String email, Vehicle vehicleSold, double price, double monthlyPayment, double salesTax, double recordingFee, double processingFee, String finance) {
-        super(date, name, email, vehicleSold, price, monthlyPayment);
-        this.salesTax = salesTax;
-        this.recordingFee = recordingFee;
-        this.processingFee = processingFee;
+    public SalesContract(String date, String name, String email, Vehicle vehicleSold, String finance) {
+        super(date, name, email, vehicleSold);
+        this.salesTax = vehicleSold.getPrice()*.05;
+        this.recordingFee = 100.0;
+        if (vehicleSold.getPrice()>=10000.0){
+            processingFee = 495;
+        }
+        else {
+            processingFee = 295;
+        }
         this.finance = finance;
     }
 

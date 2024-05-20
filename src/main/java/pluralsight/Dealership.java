@@ -100,6 +100,20 @@ public class Dealership {
         return matchingVehicles;
     }
 
+    public Vehicle getVehicleByVIN(int VIN) {
+
+        Vehicle found = null;
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVin() == VIN) {
+                found = vehicle;
+                break;
+            }
+        }
+        return found;
+    }
+
+
+
     public List<Vehicle> getAllVehicles() {
         return inventory;
     }

@@ -16,7 +16,7 @@ public class ContractFileManager {
                 String[] fields = line.split("\\|");
                 if (fields[0].trim().equalsIgnoreCase("SALE")) {
                     Vehicle saleInContract = new Vehicle(Integer.parseInt(fields[4]), Integer.parseInt(fields[5]), fields[6], fields[7], fields[8], fields[9], Integer.parseInt(fields[10]), Double.parseDouble(fields[11]));
-                    contracts.add(new SalesContract(fields[1], fields[2], fields[3], saleInContract, Double.parseDouble(fields[11]), Double.parseDouble(fields[17]), Double.parseDouble(fields[12]), Double.parseDouble(fields[13]), Double.parseDouble(fields[14]), fields[10]));
+                    //contracts.add(new SalesContract(fields[1], fields[2], fields[3], saleInContract, Double.parseDouble(fields[11]), Double.parseDouble(fields[17]), Double.parseDouble(fields[12]), Double.parseDouble(fields[13]), Double.parseDouble(fields[14]), fields[10]));
                 }
                 if (fields[0].trim().equalsIgnoreCase("LEASE")) {
                     Vehicle leaseInContract = new Vehicle(Integer.parseInt(fields[4]), Integer.parseInt(fields[5]), fields[6], fields[7], fields[8], fields[9], Integer.parseInt(fields[10]), Double.parseDouble(fields[11]));
@@ -36,8 +36,7 @@ public class ContractFileManager {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
             if (contract instanceof SalesContract) {
                 Vehicle vehicle = contract.vehicleSold;
-                bw.write("SALE|" + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "|" + vehicle.getVin() +"|"+ vehicle.getYear()+"|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + ((SalesContract) contract).getRecordingFee() + "|" + ((SalesContract) contract).getProcessingFee() + "|" + contract.getTotalPrice() + "|" + ((SalesContract) contract).isFinance() + "|" + contract.getMonthlyPayment());
-                bw.newLine();
+                bw.write("SALE|" + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "|" + vehicle.getVin() +"|"+ vehicle.getYear()+"|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|"+((SalesContract) contract).getSalesTax()+"|" + ((SalesContract) contract).getRecordingFee() + "|" + ((SalesContract) contract).getProcessingFee() + "|" + contract.getTotalPrice() + "|" + ((SalesContract) contract).isFinance() + "|" + contract.getMonthlyPayment());
             }
             if (contract instanceof LeaseContract){
                 Vehicle vehicle = contract.vehicleSold;
