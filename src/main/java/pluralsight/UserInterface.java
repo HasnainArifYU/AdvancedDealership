@@ -27,7 +27,7 @@ public class UserInterface {
             System.out.println("8. Add vehicle");
             System.out.println("9. Remove vehicle");
             System.out.println("10. Buy A Vehicle ");
-            System.out.println("11. Lease A Vehicle ");
+            System.out.println("20. Lease A Vehicle ");
             System.out.println("99. Quit");
 
             System.out.print("Enter your choice: ");
@@ -63,6 +63,9 @@ public class UserInterface {
                     break;
                 case "10":
                     processASaleRequest();
+                    break;
+                case "20":
+                    processALeaseRequest();
                     break;
                 case "99":
                     quit = true;
@@ -199,54 +202,83 @@ public class UserInterface {
         }
     }
 
-    private void processASaleRequest() {
-        double recordingFee = 100.0;
-        double salesTaxPercentage = 0.05;
-        Scanner s = new Scanner(System.in);
-        System.out.println("Please Enter the date of Sale in format YYYYMMDD ");
-        String Date = s.nextLine();
-        System.out.println("Please Enter the Name of the Buyer ");
-        String Name = s.nextLine();
-        System.out.println("Please Enter Buyer's Email ");
-        String Email = s.nextLine();
-        System.out.println("Now please enter the VIN number of your Vehicle ");
-        int VIN = s.nextInt();
-        s.nextLine();
-        double processingFee;
-        double price;
-        double salesTax;
-        String finance = null;
-
-        Vehicle found = dealership.getVehicleByVIN(VIN);
-        if (found==null) {
-            System.out.println("Vehicle not found ");
+    public void processASaleRequest() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Please Enter the date of Sale in format YYYYMMDD:");
+            String date = scanner.nextLine();
+            System.out.println("Please Enter the Name of the Buyer:");
+            String name = scanner.nextLine();
+            System.out.println("Please Enter Buyer's Email:");
+            String email = scanner.nextLine();
+            Vehicle found = null;
+            while (found == null) {
+                System.out.println("Now please enter the VIN number of your Vehicle:");
+                int vin = 0;
+                try {
+                    vin = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid VIN number. Please enter a valid numeric VIN.");
+                    continue;
+                }
+                found = dealership.getVehicleByVIN(vin);
+                if (found == null) {
+                    System.out.println("Vehicle not found. Please try again.");
+                }
+            }
+            System.out.println("Would you like to finance the car? Yes/No:");
+            String financeResponse = scanner.nextLine();
+            String financeOption;
+            if (financeResponse.equalsIgnoreCase("yes")) {
+                financeOption = "YES";
+            } else {
+                financeOption = "NO";
+            }
+            SalesContract contract = new SalesContract(date, name, email, found, financeOption);
+            ContractFileManager contractManager = new ContractFileManager();
+            contractManager.saveContract(contract);
+            dealership.removeVehicle(found);
+            DealershipFileManager dealershipManager = new DealershipFileManager();
+            dealershipManager.saveDealership(dealership);
+            System.out.println("Sale processed successfully.");
+        } catch (Exception e) {
+            System.out.println("An error occurred while processing the sale request: " + e.getMessage());
         }
-        else {
-            price = found.getPrice();
-            salesTax = price*salesTaxPercentage;
-            if (price>=10000.0) {
-                processingFee = 495;
-            }
-            else {
-                processingFee = 295;
-            }
-            System.out.println("Would you like to Finance the Car? Yes/No");
-            String reply = s.nextLine();
-            if (reply.equalsIgnoreCase("yes")) {
-                 finance = "YES";
-            }
-            else {
-                 finance = "NO";
-            }
-        }
-        SalesContract contract = new SalesContract(Date, Name, Email, found, finance);
-        ContractFileManager manager1 = new ContractFileManager();
-
-        manager1.saveContract(contract);
-        dealership.removeVehicle(found);
-        DealershipFileManager manager2 = new DealershipFileManager();
-        manager2.saveDealership(dealership);
-
     }
 
+    public void processALeaseRequest() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Please enter the date of lease in the format YYYYMMDD: ");
+            String leaseDate = scanner.nextLine();
+            System.out.println("Please enter the name of the lessee: ");
+            String lesseeName = scanner.nextLine();
+            System.out.println("Please enter the lessee's email address: ");
+            String lesseeEmail = scanner.nextLine();
+            Vehicle foundVehicle = null;
+            while (foundVehicle == null) {
+                System.out.println("Please enter the VIN number of the vehicle to be leased: ");
+                int vinNumber = 0;
+                try {
+                    vinNumber = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid VIN number. Please enter a valid numeric VIN.");
+                    continue;
+                }
+                foundVehicle = dealership.getVehicleByVIN(vinNumber);
+                if (foundVehicle == null) {
+                    System.out.println("Vehicle not found. Please try again.");
+                }
+            }
+            LeaseContract leaseContract = new LeaseContract(leaseDate, lesseeName, lesseeEmail, foundVehicle);
+            ContractFileManager contractManager = new ContractFileManager();
+            contractManager.saveContract(leaseContract);
+            dealership.removeVehicle(foundVehicle);
+            DealershipFileManager dealershipManager = new DealershipFileManager();
+            dealershipManager.saveDealership(dealership);
+            System.out.println("Lease processed successfully.");
+        } catch (Exception e) {
+            System.out.println("An error occurred while processing the lease request: " + e.getMessage());
+        }
+    }
 }
