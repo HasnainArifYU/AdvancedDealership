@@ -7,6 +7,7 @@ This document provides a comprehensive user manual for the updated Car Dealershi
 This updated version introduces functionalities for managing vehicle sales and leases:
 
 Purchase: Process vehicle purchases, potentially including features like recording down payment, calculating loan details (if integrated), and generating sales contracts.
+
 Lease: Process vehicle leases, allowing for defining lease terms, calculating monthly payments (if integrated), and generating lease agreements.
 
 ## User Stories:
@@ -37,29 +38,38 @@ As a sales manager, I want to be able to access reports on sales and inventory t
 ## Prerequisites:
 
 IntelliJ IDEA: Download and install IntelliJ IDEA from https://www.jetbrains.com/idea/download/.
+
 Java SDK: Ensure Java Development Kit is installed and configured within IntelliJ IDEA.
 
 
 ## Running the Application:
 
 Launch IntelliJ IDEA.
+
 Select "Open" and navigate to the project directory for the updated version.
+
 Once the project opens, allow IntelliJ to configure the files.
+
 Locate the main class containing the public static void main(String[] args) method.
+
 Right-click on the file and choose "Run 'UserInterface.main()'" to initiate the application.
 
 
 ## Technologies Used:
 
 Java 17 JDK
+
 IntelliJ IDEA Community Edition
 
 ## Demo:
 
-![Screenshot 2024-05-22 110042](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/534c8634-869f-4c71-ac5f-aae1bd0fbe2d)
-![Screenshot 2024-05-22 110242](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/872fe024-8121-4929-a796-1d24f04cd294)
+![Screenshot 2024-05-22 110042](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/534c8634-869f-4c71-ac5f-aae1bd0fbe2d) 
+
+![Screenshot 2024-05-22 110242](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/872fe024-8121-4929-a796-1d24f04cd294) 
+
 The Car Has been removed from the Available Cars list
 ![Screenshot 2024-05-22 110330](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/b4445025-e2af-4b9a-9bf6-3e823b48efc8)
+
 The contract has been posted to the sold/leased car txt file
 ![Screenshot 2024-05-22 110535](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/9e30554f-fa0f-412a-8833-c17069922a04)
 
@@ -71,10 +81,14 @@ Husnain Arif
 ## Thanks:
 
 A sincere thanks to Mr. Raymond Maroun for his continuous support and guidance.
+
 Special thanks to all teammates for their dedication and collaborative spirit.
 
 ## Additional Notes:
 
 The application interacts with vehicle inventory data stored in a user-friendly format (potentially CSV files).
+
 Future enhancements could include functionalities for managing financing calculations within sales and leases, generating detailed reports on sales and inventory, and potentially integrating with customer relationship management (CRM) systems.
-We hope this user manual provides a clear understanding of the updated Car Dealership Management System's capabilities. Feel free to explore the application and leverage it to optimize your dealership's sales, lease processing, and inventory management!
+
+We hope this user manual provides a clear understanding of the updated Car Dealership Management System's capabilities. Feel free to explore the application and leverage it to optimize your dealership's sales, lease processing, and inventory management
+
