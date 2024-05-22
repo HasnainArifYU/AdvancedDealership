@@ -1,15 +1,15 @@
-Advanced Car Dealsership
+#Advanced Car Dealsership
 
 This document provides a comprehensive user manual for the updated Car Dealership Management System, a console-based application designed to streamline vehicle inventory management and sales processing for dealerships.
 
-New Features:
+##New Features:
 
 This updated version introduces functionalities for managing vehicle sales and leases:
 
 Purchase: Process vehicle purchases, potentially including features like recording down payment, calculating loan details (if integrated), and generating sales contracts.
 Lease: Process vehicle leases, allowing for defining lease terms, calculating monthly payments (if integrated), and generating lease agreements.
 
-User Stories:
+##User Stories:
 
 As a sales manager, I want to find vehicles within a specific price range so that I can offer budget-appropriate options to customers.
 
@@ -33,15 +33,14 @@ As a salesperson, I need to process vehicle leases, defining lease terms and rec
 
 As a sales manager, I want to be able to access reports on sales and inventory to monitor dealership performance. (Future Enhancement)
 
-System Setup:
 
-Prerequisites:
+##Prerequisites:
 
 IntelliJ IDEA: Download and install IntelliJ IDEA from https://www.jetbrains.com/idea/download/.
 Java SDK: Ensure Java Development Kit is installed and configured within IntelliJ IDEA.
 
 
-Running the Application:
+##Running the Application:
 
 Launch IntelliJ IDEA.
 Select "Open" and navigate to the project directory for the updated version.
@@ -50,32 +49,27 @@ Locate the main class containing the public static void main(String[] args) meth
 Right-click on the file and choose "Run 'UserInterface.main()'" to initiate the application.
 
 
-Technologies Used:
+##Technologies Used:
 
 Java 17 JDK
 IntelliJ IDEA Community Edition
 
-Demo:
+##Demo:
 
 
-Resources:
-
-The following resources were helpful during project development:
-
-Java Programming Tutorial (Resource Link can be added here)
-YouTube Tutorials (Specific video links can be specified here)
 
 
-Team Members:
+
+##Team Members:
 
 Husnain Arif
 
-Thanks:
+##Thanks:
 
 A sincere thanks to Mr. Raymond Maroun for his continuous support and guidance.
 Special thanks to all teammates for their dedication and collaborative spirit.
 
-Additional Notes:
+##Additional Notes:
 
 The application interacts with vehicle inventory data stored in a user-friendly format (potentially CSV files).
 Future enhancements could include functionalities for managing financing calculations within sales and leases, generating detailed reports on sales and inventory, and potentially integrating with customer relationship management (CRM) systems.
