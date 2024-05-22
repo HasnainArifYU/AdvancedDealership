@@ -56,8 +56,12 @@ IntelliJ IDEA Community Edition
 
 ## Demo:
 
-
-
+![Screenshot 2024-05-22 110042](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/534c8634-869f-4c71-ac5f-aae1bd0fbe2d)
+![Screenshot 2024-05-22 110242](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/872fe024-8121-4929-a796-1d24f04cd294)
+The Car Has been removed from the Available Cars list
+![Screenshot 2024-05-22 110330](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/b4445025-e2af-4b9a-9bf6-3e823b48efc8)
+The contract has been posted to the sold/leased car txt file
+![Screenshot 2024-05-22 110535](https://github.com/HasnainArifYU/AdvancedDealership/assets/166551521/9e30554f-fa0f-412a-8833-c17069922a04)
 
 
 ## Team Members:
